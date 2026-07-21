@@ -1,0 +1,2820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RepuMax | Repuestos Automotrices Premium</title>
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ==========================================
+       1. VARIABLES Y DISEÑO DEL SISTEMA (CSS)
+       ========================================== */
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1e293b;
+      --bg-card-hover: #263349;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-glow: rgba(59, 130, 246, 0.4);
+      --accent: #60a5fa;
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.2);
+      --danger: #ef4444;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset & Estilos Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(96, 165, 250, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(17, 24, 39, 0.8) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    input, select, button {
+      font-family: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    /* Scrollbar Personalizado */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    /* Contenedor Principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ==========================================
+       2. COMPONENTES REUTILIZABLES / UTILITIES
+       ========================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: rgba(96, 165, 250, 0.1);
+      color: var(--accent);
+    }
+
+    .btn-danger-outline {
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
+    }
+    .btn-danger-outline:hover {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: var(--danger);
+    }
+
+    /* Insignias de Categoría */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-frenos { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-motor { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-suspension { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-electrico { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-filtros { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+
+    /* ==========================================
+       3. HEADER (BARRA SUPERIOR)
+       ========================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 25, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: var(--transition-smooth);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+
+    /* Logo Premium */
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .logo-icon {
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .logo-icon svg {
+      animation: rotate-slow 20s linear infinite;
+    }
+    .logo-text span {
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Navegación */
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-link {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      position: relative;
+      padding: 0.25rem 0;
+      transition: var(--transition-smooth);
+    }
+    .nav-link:hover {
+      color: #fff;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition-smooth);
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Carrito */
+    .cart-trigger {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      transition: var(--transition-smooth);
+    }
+    .cart-trigger:hover {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.1);
+    }
+    .cart-trigger svg {
+      color: var(--accent);
+    }
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+    .cart-badge.shake-anim {
+      animation: shake-badge 0.4s ease;
+    }
+
+    /* Hamburguesa Móvil */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* ==========================================
+       4. HERO SECTION CON BUSCADOR INTELIGENTE
+       ========================================== */
+    .hero {
+      position: relative;
+      padding: 5rem 0 4rem 0;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      line-height: 1.15;
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+      z-index: 1;
+      position: relative;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #fff 40%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      max-width: 600px;
+      margin: 0 auto 2.5rem auto;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Widget de Búsqueda de Vehículo */
+    .search-widget {
+      position: relative;
+      z-index: 10;
+      background: rgba(30, 41, 59, 0.4);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .search-widget-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .search-widget-title svg {
+      color: var(--primary);
+    }
+
+    .search-form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) auto;
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .form-group {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    .custom-select-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .custom-select {
+      width: 100%;
+      padding: 0.85rem 2.5rem 0.85rem 1rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.95rem;
+      appearance: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .custom-select:hover:not(:disabled) {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+    }
+    .custom-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25);
+    }
+    .custom-select:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 1rem;
+      pointer-events: none;
+      color: var(--text-secondary);
+    }
+
+    .search-btn-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-btn-group button {
+      height: 48px;
+    }
+
+    /* ==========================================
+       5. FILTROS Y CATEGORÍAS
+       ========================================== */
+    .filter-section {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    .filter-controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    /* Pestañas de Categoría */
+    .category-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scrollbar-width: none; /* Firefox */
+    }
+    .category-tabs::-webkit-scrollbar {
+      display: none; /* Safari & Chrome */
+    }
+
+    .tab-btn {
+      padding: 0.6rem 1.25rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition-smooth);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .tab-btn:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    /* Barra de Búsqueda Textual */
+    .text-search-wrapper {
+      position: relative;
+      min-width: 300px;
+    }
+    .text-search-wrapper input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+    .text-search-wrapper input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
+    }
+    .text-search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      pointer-events: none;
+    }
+
+    /* Banner Informativo de Compatibilidad Activa */
+    .active-compatibility-banner {
+      display: none;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .active-compatibility-banner .banner-text {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+    .clear-compatibility-btn {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ==========================================
+       6. CATALOGO DE REPUESTOS
+       ========================================== */
+    .catalog-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .catalog-title-row h2 {
+      font-size: 1.5rem;
+    }
+    .results-count {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    /* Tarjetas de Producto */
+    .product-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      transition: var(--transition-smooth);
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Contenedor de Imagen de Repuesto (SVG dinámico) */
+    .product-img-wrapper {
+      height: 180px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .product-img-wrapper svg {
+      width: 90px;
+      height: 90px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.3));
+      transition: var(--transition-smooth);
+    }
+    .product-card:hover .product-img-wrapper svg {
+      transform: scale(1.1) rotate(5deg);
+      color: #fff;
+    }
+
+    .product-card-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-brand-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+      color: #fff;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.6rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .product-name:hover {
+      color: var(--accent);
+    }
+
+    /* Badge de Compatibilidad Específica en Tarjeta */
+    .compatibility-badge-status {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .compatibility-badge-status.compatible {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .compatibility-badge-status.not-matched {
+      background: rgba(148, 163, 184, 0.08);
+      color: var(--text-secondary);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+    }
+
+    .product-price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+      margin-top: auto;
+      margin-bottom: 1rem;
+    }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+    }
+
+    /* Estado de catálogo vacío */
+    .empty-catalog {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(30, 41, 59, 0.2);
+      border: 1px dashed var(--border);
+      border-radius: 16px;
+    }
+    .empty-catalog svg {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .empty-catalog h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .empty-catalog p {
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    /* ==========================================
+       7. DETALLE DE PIEZA (MODAL)
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 200;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 750px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: var(--transition-smooth);
+      z-index: 10;
+    }
+    .modal-close-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(90deg);
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+    }
+
+    @media (max-width: 768px) {
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-img-column {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      border-right: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .modal-img-column {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 2rem;
+      }
+    }
+    .modal-img-column svg {
+      width: 140px;
+      height: 140px;
+      color: var(--accent);
+      filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.4));
+    }
+
+    .modal-info-column {
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .modal-part-no {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .modal-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-section-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Tabla de Especificaciones Técnicas */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+    }
+    .specs-table td {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+    }
+    .specs-table td:first-child {
+      color: var(--text-secondary);
+      font-weight: 500;
+      width: 40%;
+    }
+    .specs-table td:last-child {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Compatibilidad Ampliada */
+    .modal-compat-info {
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .modal-compat-info p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+    }
+    .modal-compat-info strong {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .modal-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .modal-price-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* ==========================================
+       8. CARRITO LATERAL (DRAWER)
+       ========================================== */
+    .cart-drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 15, 25, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 250;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .cart-drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 460px;
+      height: 100%;
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+      z-index: 260;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cart-drawer-overlay.active + .cart-drawer,
+    .cart-drawer.active {
+      transform: translateX(0);
+    }
+
+    .cart-drawer-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-drawer-header h3 {
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .cart-drawer-header h3 svg {
+      color: var(--accent);
+    }
+    .cart-close-btn {
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    .cart-close-btn:hover {
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .cart-drawer-body {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Lista de ítems del Carrito */
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cart-item-img {
+      width: 55px;
+      height: 55px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+    .cart-item-img svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-item-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.25rem;
+      line-height: 1.2;
+    }
+    .cart-item-price {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .qty-counter {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition-smooth);
+    }
+    .qty-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent);
+    }
+    .qty-val {
+      padding: 0 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cart-item-remove-btn {
+      color: var(--danger);
+      opacity: 0.7;
+      cursor: pointer;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: var(--transition-smooth);
+    }
+    .cart-item-remove-btn:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .cart-empty-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .cart-empty-state svg {
+      opacity: 0.4;
+    }
+
+    /* Checkout Form Drawer / Panel */
+    .checkout-form-panel {
+      display: none; /* Se activa al proceder al pago */
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .checkout-form-panel.active {
+      display: block;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .checkout-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .checkout-input-group label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+    .checkout-input-group input,
+    .checkout-input-group select {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+      transition: var(--transition-smooth);
+    }
+    .checkout-input-group input:focus,
+    .checkout-input-group select:focus {
+      border-color: var(--accent);
+    }
+
+    /* Pie de Carrito con Totales */
+    .cart-drawer-footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .cart-totals {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .total-row.grand-total {
+      font-size: 1.25rem;
+      color: #fff;
+      font-weight: 800;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .cart-action-btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* ==========================================
+       9. SIMULADOR DE PEDIDO COMPLETADO
+       ========================================== */
+    .success-panel {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      animation: scaleUp 0.4s ease;
+      height: 100%;
+    }
+
+    .success-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--success);
+      border: 2px solid var(--success);
+      box-shadow: 0 0 20px var(--success-glow);
+    }
+    .success-ring svg {
+      animation: check-anim 0.5s ease forwards;
+    }
+
+    .success-title {
+      font-size: 1.6rem;
+      color: #fff;
+    }
+    .success-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      max-width: 320px;
+    }
+
+    .order-receipt {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 100%;
+      padding: 1.25rem;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    .receipt-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+    }
+    .receipt-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding-top: 0.5rem;
+      color: var(--accent);
+    }
+
+    /* ==========================================
+       10. FOOTER
+       ========================================== */
+    .footer {
+      background: #060911;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .footer-about p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      position: relative;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+    .footer-links a {
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+      padding-left: 4px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .footer-contact-item svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Garantía y Sellos */
+    .trust-seals-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .trust-seal {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+    .trust-seal svg {
+      color: var(--success);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .payment-methods-row {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .payment-icon {
+      height: 26px;
+      opacity: 0.6;
+      transition: var(--transition-smooth);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .payment-icon:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    /* ==========================================
+       11. ANIMACIONES Y MEDIA QUERIES
+       ========================================== */
+    @keyframes rotate-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes shake-badge {
+      0%, 100% { transform: scale(1); }
+      20%, 60% { transform: scale(1.3) rotate(-10deg); }
+      40%, 80% { transform: scale(1.3) rotate(10deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes check-anim {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Media Queries generales */
+    @media (max-width: 992px) {
+      .hero-title {
+        font-size: 2.25rem;
+      }
+      .search-form-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .search-btn-group {
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+      .search-btn-group button {
+        flex-grow: 1;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-inner {
+        height: 70px;
+      }
+      .nav {
+        display: none; /* Oculta menú estándar para móvil */
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      .catalog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Gradiente sutil y fondo metalizado -->
+  <svg style="width:0; height:0; position:absolute;">
+    <defs>
+      <linearGradient id="blue-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.6"/>
+        <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.3"/>
+        <stop offset="100%" stop-color="#0f172a" stop-opacity="0.8"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- ==========================================
+       HEADER (BARRA SUPERIOR)
+       ========================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <!-- Logo RepuMax -->
+      <a href="#" class="logo-container">
+        <div class="logo-icon">
+          <i data-lucide="settings" style="width: 32px; height: 32px;"></i>
+        </div>
+        <div class="logo-text">Repu<span>Max</span></div>
+      </a>
+
+      <!-- Navegación central (SPA) -->
+      <nav class="nav">
+        <a href="#catalogo-seccion" class="nav-link">Catálogo</a>
+        <a href="#" class="nav-link" onclick="scrollToWidget(event)">Compatibilidad</a>
+        <a href="#" class="nav-link" onclick="showWarrantyAlert(event)">Garantías</a>
+        <a href="#footer-seccion" class="nav-link">Soporte</a>
+      </nav>
+
+      <!-- Gatillo del Carrito de compras -->
+      <div class="cart-trigger" onclick="openCartDrawer()">
+        <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+        <span style="font-weight: 600; font-size: 0.9rem; margin-left: 0.25rem;">Pedido</span>
+        <div id="cartBadgeCount" class="cart-badge">0</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO & VEHICLE FILTER SECTION
+       ========================================== -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="container" style="position: relative; z-index: 5;">
+      <h1 class="hero-title">El repuesto <span>exacto y compatible</span> para tu vehículo</h1>
+      <p class="hero-subtitle">Verifica al instante la compatibilidad mecánica de las piezas con nuestra base de datos inteligente de alta precisión.</p>
+      
+      <!-- Buscador de Vehículo Widget -->
+      <div class="search-widget" id="searchWidgetBlock">
+        <div class="search-widget-title">
+          <i data-lucide="shield-check" style="width: 20px; height: 20px;"></i>
+          <span>Verificador de Compatibilidad Mecánica</span>
+        </div>
+        <div class="search-form-grid">
+          <!-- Campo Marca -->
+          <div class="form-group">
+            <label for="brandSelect">1. Marca del Carro</label>
+            <div class="custom-select-wrapper">
+              <select id="brandSelect" class="custom-select">
+                <option value="">Selecciona Marca</option>
+              </select>
+              <i data-lucide="chevron-down" class="select-arrow" style="width: 18px; height: 18px;"></i>
+            </div>
+          </div>
+          
+          <!-- Campo Modelo (dependiente de Marca) -->
+          <div class="form-group">
+            <label for="modelSelect">2. Modelo del Carro</label>
+            <div class="custom-select-wrapper">
+              <select id="modelSelect" class="custom-select" disabled>
+                <option value="">Selecciona Modelo</option>
+              </select>
+              <i data-lucide="chevron-down" class="select-arrow" style="width: 18px; height: 18px;"></i>
+            </div>
+          </div>
+          
+          <!-- Campo Año (dependiente de Modelo) -->
+          <div class="form-group">
+            <label for="yearSelect">3. Año de Fabricación</label>
+            <div class="custom-select-wrapper">
+              <select id="yearSelect" class="custom-select" disabled>
+                <option value="">Selecciona Año</option>
+              </select>
+              <i data-lucide="chevron-down" class="select-arrow" style="width: 18px; height: 18px;"></i>
+            </div>
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="search-btn-group">
+            <button class="btn btn-primary" onclick="applyVehicleFilter()" title="Buscar repuestos compatibles">
+              <i data-lucide="search" style="width: 18px; height: 18px;"></i>
+              Buscar
+            </button>
+            <button class="btn btn-outline" onclick="resetVehicleFilter()" title="Limpiar filtro de vehículo">
+              <i data-lucide="rotate-ccw" style="width: 18px; height: 18px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MAIN CONTENT: CATALOG & FILTERS
+       ========================================== -->
+  <main class="container" id="catalogo-seccion" style="padding-top: 1rem;">
+    <!-- Barra de Filtros y Categorías -->
+    <section class="filter-section">
+      <div class="filter-controls-row">
+        <!-- Pestañas de categorías -->
+        <div class="category-tabs" id="categoryTabContainer">
+          <button class="tab-btn active" onclick="setCategory('all')">Todos</button>
+          <button class="tab-btn" onclick="setCategory('frenos')">Frenos</button>
+          <button class="tab-btn" onclick="setCategory('motor')">Motor</button>
+          <button class="tab-btn" onclick="setCategory('suspension')">Suspensión</button>
+          <button class="tab-btn" onclick="setCategory('electrico')">Sistema Eléctrico</button>
+          <button class="tab-btn" onclick="setCategory('filtros')">Filtros</button>
+        </div>
+
+        <!-- Buscador por texto -->
+        <div class="text-search-wrapper">
+          <i data-lucide="search" class="text-search-icon" style="width: 16px; height: 16px;"></i>
+          <input type="text" id="textSearchInput" placeholder="Nombre, fabricante, código de parte..." oninput="handleTextSearch(event)">
+        </div>
+      </div>
+
+      <!-- Banner de Compatibilidad Activa -->
+      <div class="active-compatibility-banner" id="compatibilityBanner">
+        <div class="banner-text">
+          <i data-lucide="shield-check" style="width: 18px; height: 18px;"></i>
+          <span id="compatibilityBannerText">Filtrando por compatibilidad con Toyota Corolla 2020</span>
+        </div>
+        <div class="clear-compatibility-btn" onclick="resetVehicleFilter()">Eliminar Filtro</div>
+      </div>
+    </section>
+
+    <!-- Catálogo Titulo y Grid -->
+    <section>
+      <div class="catalog-title-row">
+        <h2>Catálogo de Piezas</h2>
+        <div class="results-count" id="resultsCount">Mostrando 10 productos</div>
+      </div>
+
+      <!-- Grid del catálogo -->
+      <div class="catalog-grid" id="catalogGrid">
+        <!-- Renderizado dinámico desde JS -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================
+       DETALLE DE PIEZA MODAL
+       ========================================== */ -->
+  <div class="modal-overlay" id="productModal" onclick="closeProductModalOutside(event)">
+    <div class="modal-card">
+      <div class="modal-close-btn" onclick="closeProductModal()">
+        <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+      </div>
+      <div class="modal-grid" id="modalGridContent">
+        <!-- Cargado dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       CARRITO LATERAL (DRAWER)
+       ========================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="closeCartDrawer()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>
+        <i data-lucide="shopping-bag" style="width: 22px; height: 22px;"></i>
+        Mi Pedido
+      </h3>
+      <div class="cart-close-btn" onclick="closeCartDrawer()">
+        <i data-lucide="chevron-right" style="width: 24px; height: 24px;"></i>
+      </div>
+    </div>
+
+    <!-- Cuerpo del Carrito (Lista de productos o éxito o vacío) -->
+    <div class="cart-drawer-body" id="cartDrawerBody">
+      <!-- Se carga dinámicamente (artículos del carrito o formulario de checkout) -->
+    </div>
+
+    <!-- Pie del Carrito -->
+    <div class="cart-drawer-footer" id="cartDrawerFooter">
+      <div class="cart-totals">
+        <div class="total-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0</span>
+        </div>
+        <div class="total-row">
+          <span>IVA (19%)</span>
+          <span id="cartTax">$0</span>
+        </div>
+        <div class="total-row grand-total">
+          <span>Total a Pagar</span>
+          <span id="cartTotal">$0</span>
+        </div>
+      </div>
+      <div class="cart-action-btn-row" id="cartActionBtnRow">
+        <button class="btn btn-primary" id="checkoutFlowBtn" onclick="toggleCheckoutForm()">
+          Proceder a Compra
+        </button>
+        <button class="btn btn-outline" onclick="closeCartDrawer()">
+          Seguir Comprando
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       FOOTER (PIE DE PAGINA)
+       ========================================== -->
+  <footer class="footer" id="footer-seccion">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Info General -->
+        <div class="footer-col footer-about">
+          <a href="#" class="logo-container" style="margin-bottom: 0.5rem;">
+            <div class="logo-icon">
+              <i data-lucide="settings" style="width: 28px; height: 28px; color: var(--primary);"></i>
+            </div>
+            <div class="logo-text">Repu<span>Max</span></div>
+          </a>
+          <p>Plataforma líder en autopartes de alta ingeniería. Garantizamos compatibilidad mecánica del 100% gracias a nuestras validaciones por número de pieza y bases de datos certificadas.</p>
+          <div class="trust-seals-row" style="margin-top: 0.5rem;">
+            <div class="trust-seal">
+              <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+              <span>Compatibilidad Certificada</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna 2: Enlaces Rápidos -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#catalogo-seccion">Catálogo de Piezas</a></li>
+            <li><a href="#" onclick="scrollToWidget(null)">Compatibilidad Vehicular</a></li>
+            <li><a href="#" onclick="showWarrantyAlert(null)">Políticas de Garantía</a></li>
+            <li><a href="#" onclick="showPaymentAlert(null)">Métodos de Pago</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Horarios & Garantías -->
+        <div class="footer-col">
+          <h4>Servicio al Cliente</h4>
+          <ul class="footer-links" style="color: var(--text-secondary); font-size: 0.9rem; display:flex; flex-direction:column; gap:0.5rem;">
+            <li><strong>Soporte Técnico:</strong> Lun a Sáb: 8:00 AM - 6:00 PM</li>
+            <li><strong>Despachos:</strong> A nivel nacional (Envío Asegurado)</li>
+            <li><strong>Devoluciones:</strong> 15 días de retracto sin costo si la pieza no es compatible</li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Contacto Técnico -->
+        <div class="footer-col">
+          <h4>Contacto</h4>
+          <div class="footer-contact-item">
+            <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
+            <span>Av. Tecnológica #1024, Edificio de Ingeniería, Bogotá, Colombia</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="phone" style="width: 18px; height: 18px;"></i>
+            <span>+57 (601) 345-6789 <br> +57 321 987 6543</span>
+          </div>
+          <div class="footer-contact-item">
+            <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+            <span>soporte@repumax-autopartes.com</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>
+          <p>&copy; 2026 RepuMax S.A. Todos los derechos reservados. Diseñado para Máximo Rendimiento Mecánico.</p>
+        </div>
+        <div class="payment-methods-row">
+          <span style="font-size: 0.8rem; margin-right: 0.5rem; font-weight: 500;">Pagos Seguros:</span>
+          <div class="payment-icon" title="Tarjeta de Crédito / Débito">
+            <i data-lucide="credit-card" style="width: 18px; height: 18px; color: var(--accent);"></i>
+          </div>
+          <div class="payment-icon" title="Transferencia Bancaria Directa / PSE / ACH">
+            <i data-lucide="landmark" style="width: 18px; height: 18px; color: var(--accent);"></i>
+          </div>
+          <div class="payment-icon" title="Efectivo en Puntos de Pago o Contra Entrega">
+            <i data-lucide="banknote" style="width: 18px; height: 18px; color: var(--accent);"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       LOGICA Y MOTOR DE LA APLICACIÓN (JS)
+       ========================================== -->
+  <script>
+    /* ==========================================
+       MOCK DATA DE REPUESTOS (10 Productos)
+       ========================================== */
+    const repuestosData = [
+      {
+        id: 1,
+        nombre: "Pastillas de Freno Cerámicas Brembo Premium",
+        categoria: "frenos",
+        marcaRepuesto: "Brembo",
+        compatibilidad: {
+          marca: "Toyota",
+          modelos: ["Corolla", "RAV4"],
+          años: [2016, 2017, 2018, 2019, 2020, 2021, 2022]
+        },
+        precio: 185000,
+        numeroParte: "BRM-TX4592",
+        descripcion: "Pastillas de freno fabricadas con materiales cerámicos avanzados de alta resistencia al calor. Reducen el desgaste, minimizan el ruido y proporcionan un frenado inmediato sin generar polvo en los rines. Diseñado para conducción exigente.",
+        especificaciones: {
+          "Material de Fricción": "Cerámico Premium de Baja Resistencia Térmica",
+          "Posición de Instalación": "Ruedas Delanteras",
+          "Garantía": "12 meses / 20.000 Km",
+          "Norma de Seguridad": "Certificación ECE-R90"
+        }
+      },
+      {
+        id: 2,
+        nombre: "Discos de Freno Ventilados de Acero Bosch",
+        categoria: "frenos",
+        marcaRepuesto: "Bosch",
+        compatibilidad: {
+          marca: "Toyota",
+          modelos: ["Corolla", "Hilux"],
+          años: [2018, 2019, 2020, 2021, 2022, 2023, 2024]
+        },
+        precio: 290000,
+        numeroParte: "BSH-9012V",
+        descripcion: "Discos ventilados diseñados por computadora para lograr un flujo de aire óptimo a través de la fundición de hierro gris de alto contenido de carbono. Eliminan la fatiga mecánica por sobrecalentamiento y garantizan suavidad en el pedal.",
+        especificaciones: {
+          "Material": "Hierro Fundido de Alto Carbono (Gris)",
+          "Tipo de Disco": "Ventilado con ranuras disipadoras",
+          "Diámetro Total": "275 mm",
+          "Espesor Nominal": "24 mm"
+        }
+      },
+      {
+        id: 3,
+        nombre: "Bujía de Iridio Láser NGK de Alta Eficiencia",
+        categoria: "motor",
+        marcaRepuesto: "NGK",
+        compatibilidad: {
+          marca: "Nissan",
+          modelos: ["Sentra", "Qashqai"],
+          años: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+        },
+        precio: 42000,
+        numeroParte: "NGK-DF6H-11B",
+        descripcion: "Bujía de encendido con punta de Iridio soldada con láser y electrodo de platino en el lado de tierra. Brinda la chispa más estable del mercado, optimizando el consumo de combustible y asegurando encendidos fiables a temperaturas extremas.",
+        especificaciones: {
+          "Diámetro de Rosca": "12 mm",
+          "Alcance de la Rosca": "26.5 mm",
+          "Material del Núcleo": "Iridio con Punta de Platino",
+          "Vida Útil Estimada": "100.000 Km bajo condiciones óptimas"
+        }
+      },
+      {
+        id: 4,
+        nombre: "Filtro de Aceite Sintético Avanzado Mobil 1",
+        categoria: "filtros",
+        marcaRepuesto: "Mobil 1",
+        compatibilidad: {
+          marca: "Ford",
+          modelos: ["F-150", "Ranger"],
+          años: [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+        },
+        precio: 55000,
+        numeroParte: "M1-MC154",
+        descripcion: "Filtro de aceite sintético de alta capacidad. Su fibra de microvidrio atrapa el 99% de los sedimentos dañinos antes de que entren al motor. Diseñado para resistir aceites de alta viscosidad y proteger el motor por largos periodos.",
+        especificaciones: {
+          "Eficiencia de Filtrado": "99.1% en partículas de 30 micras",
+          "Válvula Antisifón": "Silicona de alta temperatura",
+          "Presión de Apertura de Alivio": "15 PSI",
+          "Durabilidad": "15.000 Km de protección garantizada"
+        }
+      },
+      {
+        id: 5,
+        nombre: "Amortiguador Delantero Hidráulico de Gas KYB Excel-G",
+        categoria: "suspension",
+        marcaRepuesto: "KYB",
+        compatibilidad: {
+          marca: "Hyundai",
+          modelos: ["Tucson", "Accent"],
+          años: [2016, 2017, 2018, 2019, 2020, 2021, 2022]
+        },
+        precio: 450000,
+        numeroParte: "KYB-339241",
+        descripcion: "Amortiguador bitubo de gas nitrógeno patentado. Restablece la respuesta original de amortiguación del vehículo controlando el balanceo lateral y mejorando significativamente la estabilidad de frenado en curvas cerradas.",
+        especificaciones: {
+          "Tipo": "Amortiguador de Presión de Gas Nitrógeno",
+          "Estructura Interna": "Cámara Bitubo Autorregulable",
+          "Posición": "Eje Delantero (Universal Izquierdo/Derecho)",
+          "Garantía Mecánica": "18 meses contra fugas de aceite"
+        }
+      },
+      {
+        id: 6,
+        nombre: "Kit de Embrague Completo LUK RepSet Pro",
+        categoria: "suspension",
+        marcaRepuesto: "LUK",
+        compatibilidad: {
+          marca: "Ford",
+          modelos: ["Ranger", "Focus"],
+          años: [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]
+        },
+        precio: 1200000,
+        numeroParte: "LUK-6243292",
+        descripcion: "Kit de embrague completo que incluye prensa de diafragma autoajustable, disco de embrague amortiguador y balinera de empuje hidráulica. Reduce el esfuerzo de pisada en pedal y alarga la transmisión mecánica del par motor.",
+        especificaciones: {
+          "Diámetro Externo": "240 mm",
+          "Cantidad de Estrías": "23 dientes de acople",
+          "Componentes": "Prensa, Disco, Balinera de Empuje y Alineador",
+          "Garantía": "12 meses o 25.000 Km"
+        }
+      },
+      {
+        id: 7,
+        nombre: "Batería de Calcio-Plata Sellada Bosch S5",
+        categoria: "electrico",
+        marcaRepuesto: "Bosch",
+        compatibilidad: {
+          marca: "Universal",
+          modelos: [],
+          años: []
+        },
+        precio: 520000,
+        numeroParte: "BSH-S5-80D",
+        descripcion: "Batería totalmente libre de mantenimiento equipada con rejillas patentadas de tecnología de Aleación de Calcio y Plata. Ofrece un 30% más de poder de arranque en climas fríos y mayor vida útil ante vibraciones mecánicas.",
+        especificaciones: {
+          "Voltaje Nominal": "12 Voltios",
+          "Amperaje total de capacidad": "75 Ah (Amperios hora)",
+          "Corriente de Arranque Frío (CCA)": "720 Amperios",
+          "Disposición de Bornes": "Polo Positivo a la Derecha"
+        }
+      },
+      {
+        id: 8,
+        nombre: "Alternador Automotriz de Alto Rendimiento Denso",
+        categoria: "electrico",
+        marcaRepuesto: "Denso",
+        compatibilidad: {
+          marca: "Toyota",
+          modelos: ["Corolla", "Hilux"],
+          años: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+        },
+        precio: 890000,
+        numeroParte: "DEN-104210",
+        descripcion: "Alternador diseñado para proporcionar energía estable de carga a todos los sistemas eléctricos del auto. Incorpora bobinas de cobre de alta pureza y reguladores de voltaje integrados de respuesta milimétrica para evitar picos de corriente.",
+        especificaciones: {
+          "Entrega de corriente máxima": "100 Amperios",
+          "Voltaje del Regulador": "14.2 V",
+          "Tipo de Polea": "Polea tipo Serpentina con 6 canales",
+          "Cojinete / Balinera": "Sellado de doble hilera de alta velocidad"
+        }
+      },
+      {
+        id: 9,
+        nombre: "Filtro de Aire Lavable K&N de Alto Flujo",
+        categoria: "filtros",
+        marcaRepuesto: "K&N",
+        compatibilidad: {
+          marca: "Nissan",
+          modelos: ["Sentra", "Frontier"],
+          años: [2018, 2019, 2020, 2021, 2022, 2023, 2024]
+        },
+        precio: 215000,
+        numeroParte: "KN-33-2031",
+        descripcion: "Filtro de aire lavable de alto flujo de aire diseñado para aumentar la potencia del motor del auto mediante un flujo de aire constante y sin restricciones. Estructurado con 4 capas de gasa de algodón aceitada.",
+        especificaciones: {
+          "Material del Medio Filtrante": "Gasa de algodón aceitada de múltiples capas",
+          "Mantenimiento": "Lavable y reutilizable cada 80.000 Km",
+          "Garantía de Fábrica": "Garantía de 1 Millón de Millas (K&N)",
+          "Forma de Diseño": "Plano rectangular drop-in"
+        }
+      },
+      {
+        id: 10,
+        nombre: "Kit de Distribución de Correa y Tensores Gates",
+        categoria: "motor",
+        marcaRepuesto: "Gates",
+        compatibilidad: {
+          marca: "Hyundai",
+          modelos: ["Accent", "Elantra"],
+          años: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+        },
+        precio: 360000,
+        numeroParte: "GAT-TCK328",
+        descripcion: "Kit de sincronización de motor que incluye la correa de distribución de caucho reforzada con aramida y poleas tensoras lubricadas permanentemente. Diseñado para resistir las presiones extremas de motores modernos.",
+        especificaciones: {
+          "Componentes del Kit": "Correa Dentada de Sincronización, Polea Tensora, Polea Guía",
+          "Material de la Correa": "Goma EPDM de alta resistencia al calor y ozono",
+          "Garantía Mecánica": "12 meses o 50.000 Km de uso",
+          "Origen de Producción": "Estados Unidos"
+        }
+      }
+    ];
+
+    /* ==========================================
+       BASE DE DATOS DE VEHÍCULOS (CASCADA)
+       ========================================== */
+    const vehiculosBase = {
+      "Toyota": {
+        "Corolla": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Hilux": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "RAV4": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+      },
+      "Nissan": {
+        "Sentra": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Frontier": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Qashqai": [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
+      },
+      "Ford": {
+        "F-150": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Ranger": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Focus": [2015, 2016, 2017, 2018, 2019]
+      },
+      "Hyundai": {
+        "Tucson": [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Elantra": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024],
+        "Accent": [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
+      }
+    };
+
+    /* ==========================================
+       ESTADO DE LA APLICACIÓN
+       ========================================== */
+    const AppState = {
+      // Filtro de vehículo activo
+      filterVehicle: {
+        brand: "",
+        model: "",
+        year: ""
+      },
+      // Filtros aplicados oficialmente
+      appliedVehicle: {
+        brand: "",
+        model: "",
+        year: ""
+      },
+      currentCategory: "all",
+      searchText: "",
+      cart: [],
+      isCheckoutFlow: false
+    };
+
+    /* ==========================================
+       FUNCIONES DE DETECCIÓN Y GENERACIÓN DE SVGs
+       ========================================== */
+    function getProductSVG(category) {
+      switch (category) {
+        case "frenos":
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="50" cy="50" r="38" stroke="var(--accent)" stroke-width="3" />
+              <circle cx="50" cy="50" r="28" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="3, 3" />
+              <circle cx="50" cy="50" r="14" stroke="var(--border)" stroke-width="2" />
+              <circle cx="50" cy="40" r="2.5" fill="var(--text-secondary)" stroke="none" />
+              <circle cx="50" cy="60" r="2.5" fill="var(--text-secondary)" stroke="none" />
+              <circle cx="40" cy="50" r="2.5" fill="var(--text-secondary)" stroke="none" />
+              <circle cx="60" cy="50" r="2.5" fill="var(--text-secondary)" stroke="none" />
+              <path d="M75,20 C85,30 89,45 85,58 L75,54 C78,45 75,35 68,28 Z" fill="url(#blue-metallic)" stroke="var(--accent)" stroke-width="1.5" />
+            </svg>
+          `;
+        case "motor":
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="33" y="16" width="34" height="24" rx="2" fill="url(#blue-metallic)" stroke="var(--accent)" stroke-width="2" />
+              <line x1="33" y1="23" x2="67" y2="23" stroke="var(--border)" stroke-width="1.5" />
+              <line x1="33" y1="29" x2="67" y2="29" stroke="var(--border)" stroke-width="1.5" />
+              <line x1="33" y1="35" x2="67" y2="35" stroke="var(--border)" stroke-width="1.5" />
+              <rect x="44" y="40" width="12" height="32" rx="3" fill="none" stroke="var(--accent)" stroke-width="2" />
+              <circle cx="50" cy="46" r="3.5" fill="var(--accent)" stroke="none" />
+              <circle cx="50" cy="72" r="7" stroke="var(--accent)" stroke-width="2" />
+            </svg>
+          `;
+        case "suspension":
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="46" y="42" width="8" height="42" rx="2" fill="url(#blue-metallic)" stroke="var(--accent)" stroke-width="2" />
+              <rect x="42" y="18" width="16" height="15" fill="none" stroke="var(--border)" stroke-width="2" />
+              <circle cx="50" cy="11" r="5.5" stroke="var(--accent)" stroke-width="2" />
+              <circle cx="50" cy="90" r="5.5" stroke="var(--accent)" stroke-width="2" />
+              <path d="M38,28 C50,26 62,30 62,33 C62,36 38,38 38,41 C38,44 62,46 62,49 C62,52 38,54 38,57 C38,60 62,62 62,65 C62,68 38,70 38,73" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          `;
+        case "electrico":
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="23" y="32" width="54" height="42" rx="4" fill="url(#blue-metallic)" stroke="var(--accent)" stroke-width="2" />
+              <rect x="31" y="24" width="12" height="8" fill="var(--text-secondary)" stroke="var(--border)" stroke-width="1.5" />
+              <rect x="57" y="24" width="12" height="8" fill="var(--text-secondary)" stroke="var(--border)" stroke-width="1.5" />
+              <path d="M37,42 L37,50 M33,46 L41,46" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
+              <line x1="59" y1="46" x2="67" y2="46" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
+              <path d="M48,50 L53,57 L46,57 L51,66" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          `;
+        case "filtros":
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="30" y="24" width="40" height="52" rx="4" fill="url(#blue-metallic)" stroke="var(--accent)" stroke-width="2" />
+              <rect x="27" y="19" width="46" height="5" rx="1.5" fill="var(--border)" stroke="var(--accent)" stroke-width="1.5" />
+              <line x1="38" y1="28" x2="38" y2="72" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 3" />
+              <line x1="44" y1="28" x2="44" y2="72" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 3" />
+              <line x1="50" y1="28" x2="50" y2="72" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 3" />
+              <line x1="56" y1="28" x2="56" y2="72" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 3" />
+              <line x1="62" y1="28" x2="62" y2="72" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="2 3" />
+            </svg>
+          `;
+        default:
+          return `
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="50" cy="50" r="40" stroke="var(--border)" />
+            </svg>
+          `;
+      }
+    }
+
+    /* Formatear Moneda */
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+      }).format(value);
+    }
+
+    /* ==========================================
+       INICIALIZACIÓN DE LA APLICACIÓN
+       ========================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      // Iniciar iconos de Lucide
+      lucide.createIcons();
+
+      // Cargar marcas en el buscador principal
+      initCascadeSelectors();
+
+      // Renderizar el catálogo inicial
+      renderCatalog();
+
+      // Renderizar el carrito de compras
+      updateCartUI();
+    });
+
+    /* ==========================================
+       MANEJO DE SELECCIÓN EN CASCADA
+       ========================================== */
+    function initCascadeSelectors() {
+      const brandSelect = document.getElementById("brandSelect");
+      const modelSelect = document.getElementById("modelSelect");
+      const yearSelect = document.getElementById("yearSelect");
+
+      // Cargar marcas
+      brandSelect.innerHTML = '<option value="">Selecciona Marca</option>';
+      for (const brand in vehiculosBase) {
+        const option = document.createElement("option");
+        option.value = brand;
+        option.textContent = brand;
+        brandSelect.appendChild(option);
+      }
+
+      // Evento Marca
+      brandSelect.addEventListener("change", () => {
+        const selectedBrand = brandSelect.value;
+        AppState.filterVehicle.brand = selectedBrand;
+        AppState.filterVehicle.model = "";
+        AppState.filterVehicle.year = "";
+
+        // Resetear modelo y año
+        modelSelect.innerHTML = '<option value="">Selecciona Modelo</option>';
+        modelSelect.disabled = !selectedBrand;
+        yearSelect.innerHTML = '<option value="">Selecciona Año</option>';
+        yearSelect.disabled = true;
+
+        if (selectedBrand) {
+          const models = vehiculosBase[selectedBrand];
+          for (const model in models) {
+            const option = document.createElement("option");
+            option.value = model;
+            option.textContent = model;
+            modelSelect.appendChild(option);
+          }
+        }
+      });
+
+      // Evento Modelo
+      modelSelect.addEventListener("change", () => {
+        const selectedBrand = brandSelect.value;
+        const selectedModel = modelSelect.value;
+        AppState.filterVehicle.model = selectedModel;
+        AppState.filterVehicle.year = "";
+
+        // Resetear año
+        yearSelect.innerHTML = '<option value="">Selecciona Año</option>';
+        yearSelect.disabled = !selectedModel;
+
+        if (selectedBrand && selectedModel) {
+          const years = vehiculosBase[selectedBrand][selectedModel];
+          years.forEach(year => {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            yearSelect.appendChild(option);
+          });
+        }
+      });
+
+      // Evento Año
+      yearSelect.addEventListener("change", () => {
+        AppState.filterVehicle.year = yearSelect.value;
+      });
+    }
+
+    /* ==========================================
+       PROCESAMIENTO DE FILTROS EN TIEMPO REAL
+       ========================================== */
+    function renderCatalog() {
+      const catalogGrid = document.getElementById("catalogGrid");
+      const resultsCount = document.getElementById("resultsCount");
+      catalogGrid.innerHTML = "";
+
+      // Filtrado unificado
+      const filtered = repuestosData.filter(product => {
+        // 1. Filtro de Categoría
+        if (AppState.currentCategory !== "all" && product.categoria !== AppState.currentCategory) {
+          return false;
+        }
+
+        // 2. Filtro de Texto (Búsqueda)
+        if (AppState.searchText.trim() !== "") {
+          const query = AppState.searchText.toLowerCase();
+          const matchName = product.nombre.toLowerCase().includes(query);
+          const matchBrand = product.marcaRepuesto.toLowerCase().includes(query);
+          const matchPN = product.numeroParte.toLowerCase().includes(query);
+          const matchDesc = product.descripcion.toLowerCase().includes(query);
+          
+          if (!matchName && !matchBrand && !matchPN && !matchDesc) {
+            return false;
+          }
+        }
+
+        // 3. Filtro de Vehículo Aplicado
+        if (AppState.appliedVehicle.brand !== "") {
+          const comp = product.compatibilidad;
+          
+          // Si el repuesto es universal, es compatible con cualquier vehículo
+          if (comp.marca === "Universal") {
+            return true;
+          }
+
+          // Si las marcas no coinciden
+          if (comp.marca !== AppState.appliedVehicle.brand) {
+            return false;
+          }
+
+          // Si hay un modelo filtrado y no está en la lista de compatibles del producto
+          if (AppState.appliedVehicle.model !== "" && !comp.modelos.includes(AppState.appliedVehicle.model)) {
+            return false;
+          }
+
+          // Si hay un año filtrado y no está en el rango de años compatibles del producto
+          if (AppState.appliedVehicle.year !== "") {
+            const yearNum = parseInt(AppState.appliedVehicle.year, 10);
+            if (!comp.años.includes(yearNum)) {
+              return false;
+            }
+          }
+        }
+
+        return true;
+      });
+
+      // Actualizar contador
+      resultsCount.textContent = `Mostrando ${filtered.length} repuestos`;
+
+      // Si no hay productos que coincidan
+      if (filtered.length === 0) {
+        catalogGrid.innerHTML = `
+          <div class="empty-catalog">
+            <i data-lucide="alert-triangle" style="width: 48px; height: 48px;"></i>
+            <h3>No se encontraron piezas</h3>
+            <p>No tenemos repuestos registrados que coincidan con los filtros aplicados en este momento. Intenta limpiando los filtros o buscando otra pieza.</p>
+            <button class="btn btn-outline" onclick="resetAllFilters()">Limpiar Todos los Filtros</button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      // Renderizar tarjetas
+      filtered.forEach(product => {
+        const isMatched = AppState.appliedVehicle.brand !== "";
+        const isUniversal = product.compatibilidad.marca === "Universal";
+        
+        let compatText = "";
+        let compatClass = "not-matched";
+        let compatIcon = "info";
+
+        if (isMatched) {
+          compatText = `Compatible con tu vehículo`;
+          compatClass = "compatible";
+          compatIcon = "check-circle-2";
+        } else {
+          if (isUniversal) {
+            compatText = "Compatibilidad: Universal";
+          } else {
+            const añosMin = Math.min(...product.compatibilidad.años);
+            const añosMax = Math.max(...product.compatibilidad.años);
+            compatText = `Compatible con: ${product.compatibilidad.marca} (${añosMin}-${añosMax})`;
+          }
+        }
+
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+          <div class="product-img-wrapper" onclick="openProductModal(${product.id})">
+            ${getProductSVG(product.categoria)}
+          </div>
+          <div class="product-card-body">
+            <div class="product-brand-tag">${product.marcaRepuesto}</div>
+            <h3 class="product-name" onclick="openProductModal(${product.id})">${product.nombre}</h3>
+            
+            <div class="compatibility-badge-status ${compatClass}">
+              <i data-lucide="${compatIcon}" style="width: 14px; height: 14px;"></i>
+              <span>${compatText}</span>
+            </div>
+
+            <div class="product-price">${formatCurrency(product.price || product.precio)}</div>
+            
+            <div class="product-actions">
+              <button class="btn btn-primary" onclick="addProductToCart(${product.id})" style="padding: 0.6rem 1rem;">
+                <i data-lucide="plus" style="width: 16px; height: 16px;"></i>
+                Agregar
+              </button>
+              <button class="btn btn-outline" onclick="openProductModal(${product.id})" style="padding: 0.6rem;" title="Ver Ficha Técnica">
+                <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        catalogGrid.appendChild(card);
+      });
+
+      // Re-instanciar iconos generados dinámicamente
+      lucide.createIcons();
+    }
+
+    /* Cambiar de categoría activa */
+    function setCategory(category) {
+      AppState.currentCategory = category;
+
+      // Actualizar estilos de los botones
+      const container = document.getElementById("categoryTabContainer");
+      const buttons = container.getElementsByClassName("tab-btn");
+      
+      const categoryMapping = {
+        'all': 0,
+        'frenos': 1,
+        'motor': 2,
+        'suspension': 3,
+        'electrico': 4,
+        'filtros': 5
+      };
+
+      const activeIndex = categoryMapping[category];
+      for (let i = 0; i < buttons.length; i++) {
+        if (i === activeIndex) {
+          buttons[i].classList.add("active");
+        } else {
+          buttons[i].classList.remove("active");
+        }
+      }
+
+      renderCatalog();
+    }
+
+    /* Entrada de barra de búsqueda por texto */
+    function handleTextSearch(event) {
+      AppState.searchText = event.target.value;
+      renderCatalog();
+    }
+
+    /* Aplicar Filtro de Vehículo del Widget */
+    function applyVehicleFilter() {
+      const brand = document.getElementById("brandSelect").value;
+      const model = document.getElementById("modelSelect").value;
+      const year = document.getElementById("yearSelect").value;
+
+      if (!brand) {
+        alert("Por favor selecciona al menos la Marca del carro para filtrar.");
+        return;
+      }
+
+      AppState.appliedVehicle.brand = brand;
+      AppState.appliedVehicle.model = model;
+      AppState.appliedVehicle.year = year;
+
+      // Actualizar Banner Informativo
+      const banner = document.getElementById("compatibilityBanner");
+      const bannerText = document.getElementById("compatibilityBannerText");
+      
+      let textStr = `Buscando piezas compatibles con <strong>${brand}</strong>`;
+      if (model) textStr += ` <strong>${model}</strong>`;
+      if (year) textStr += ` (Año <strong>${year}</strong>)`;
+      
+      bannerText.innerHTML = textStr;
+      banner.style.display = "flex";
+
+      // Renderizar catálogo filtrado
+      renderCatalog();
+
+      // Desplazarse suavemente al catálogo de piezas
+      const target = document.getElementById("catalogo-seccion");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    /* Limpiar selector de vehículo */
+    function resetVehicleFilter() {
+      // Resetear estados en AppState
+      AppState.appliedVehicle.brand = "";
+      AppState.appliedVehicle.model = "";
+      AppState.appliedVehicle.year = "";
+
+      AppState.filterVehicle.brand = "";
+      AppState.filterVehicle.model = "";
+      AppState.filterVehicle.year = "";
+
+      // Resetear Dropdowns
+      document.getElementById("brandSelect").value = "";
+      
+      const modelSelect = document.getElementById("modelSelect");
+      modelSelect.innerHTML = '<option value="">Selecciona Modelo</option>';
+      modelSelect.disabled = true;
+
+      const yearSelect = document.getElementById("yearSelect");
+      yearSelect.innerHTML = '<option value="">Selecciona Año</option>';
+      yearSelect.disabled = true;
+
+      // Esconder Banner
+      document.getElementById("compatibilityBanner").style.display = "none";
+
+      renderCatalog();
+    }
+
+    /* Limpiar todos los filtros */
+    function resetAllFilters() {
+      resetVehicleFilter();
+      document.getElementById("textSearchInput").value = "";
+      AppState.searchText = "";
+      setCategory("all");
+    }
+
+    /* Enlace de compatibilidad del header */
+    function scrollToWidget(event) {
+      if (event) event.preventDefault();
+      document.getElementById("searchWidgetBlock").scrollIntoView({ behavior: "smooth" });
+    }
+
+    /* Alertas de cabecera secundarias */
+    function showWarrantyAlert(event) {
+      if (event) event.preventDefault();
+      alert("Garantía RepuMax de 100% Compatibilidad Mecánica: Si compras una pieza filtrada por vehículo y no encaja físicamente, puedes devolverla gratis durante 15 días.");
+    }
+    function showPaymentAlert(event) {
+      if (event) event.preventDefault();
+      alert("Aceptamos pagos a través de PSE, Tarjeta de Crédito, Efecty, y Pago Contra Entrega con seguro de transporte.");
+    }
+
+    /* ==========================================
+       MODAL DE DETALLE DE PRODUCTO
+       ========================================== */
+    function openProductModal(productId) {
+      const product = repuestosData.find(p => p.id === productId);
+      if (!product) return;
+
+      const modal = document.getElementById("productModal");
+      const content = document.getElementById("modalGridContent");
+
+      // Construcción de la tabla de especificaciones
+      let specsRows = "";
+      for (const [key, value] of Object.entries(product.especificaciones)) {
+        specsRows += `
+          <tr>
+            <td>${key}</td>
+            <td>${value}</td>
+          </tr>
+        `;
+      }
+
+      // Verificación de compatibilidad vehicular en modal
+      const isFiltered = AppState.appliedVehicle.brand !== "";
+      let compatSection = "";
+
+      if (product.compatibilidad.marca === "Universal") {
+        compatSection = `
+          <div class="modal-compat-info" style="border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.04);">
+            <p style="color: var(--success); font-weight:600; display:flex; align-items:center; gap:0.25rem;">
+              <i data-lucide="check" style="width:16px; height:16px;"></i> Pieza de Compatibilidad Universal
+            </p>
+            <span style="font-size:0.8rem; color:var(--text-secondary);">Esta refacción aplica a la gran mayoría de marcas y modelos del mercado sin modificaciones mecánicas.</span>
+          </div>
+        `;
+      } else {
+        const añosMin = Math.min(...product.compatibilidad.años);
+        const añosMax = Math.max(...product.compatibilidad.años);
+        
+        if (isFiltered) {
+          compatSection = `
+            <div class="modal-compat-info" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.05);">
+              <p style="color: var(--success); font-weight: 700; display:flex; align-items:center; gap:0.25rem;">
+                <i data-lucide="shield-check" style="width: 16px; height: 16px;"></i>
+                ¡Verificado compatible con tu vehículo!
+              </p>
+              <span style="font-size:0.8rem; color:var(--text-secondary);">Diseñado bajo estándares exactos de equipo original para ${product.compatibilidad.marca}.</span>
+            </div>
+          `;
+        } else {
+          compatSection = `
+            <div class="modal-compat-info">
+              <p>Compatibilidad Original Diseñada para:</p>
+              <strong>${product.compatibilidad.marca} — Modelos: ${product.compatibilidad.modelos.join(", ")} (${añosMin} a ${añosMax})</strong>
+            </div>
+          `;
+        }
+      }
+
+      content.innerHTML = `
+        <div class="modal-img-column">
+          ${getProductSVG(product.categoria)}
+        </div>
+        <div class="modal-info-column">
+          <div class="modal-part-no">Nº de Parte: ${product.numeroParte}</div>
+          <h2 class="modal-title">${product.nombre}</h2>
+          <p class="modal-desc">${product.descripcion}</p>
+          
+          <h4 class="modal-section-title">Especificaciones Mecánicas</h4>
+          <table class="specs-table">
+            <tbody>
+              ${specsRows}
+            </tbody>
+          </table>
+
+          ${compatSection}
+
+          <div class="modal-footer-row">
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500;">Precio sugerido:</div>
+              <div class="modal-price-val">${formatCurrency(product.precio)}</div>
+            </div>
+            <button class="btn btn-primary" onclick="addProductToCart(${product.id}); closeProductModal();">
+              <i data-lucide="shopping-cart" style="width: 18px; height: 18px;"></i>
+              Agregar al Pedido
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.add("active");
+      lucide.createIcons();
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.remove("active");
+    }
+
+    function closeProductModalOutside(event) {
+      if (event.target.classList.contains("modal-overlay")) {
+        closeProductModal();
+      }
+    }
+
+    /* ==========================================
+       GESTIÓN DEL CARRITO DE COMPRAS (PEDIDO)
+       ========================================== */
+    function openCartDrawer() {
+      document.getElementById("cartDrawerOverlay").classList.add("active");
+      document.getElementById("cartDrawer").classList.add("active");
+      
+      // Siempre que se abre el carrito, si estaba en modo checkout, refrescar
+      AppState.isCheckoutFlow = false;
+      updateCartUI();
+    }
+
+    function closeCartDrawer() {
+      document.getElementById("cartDrawerOverlay").classList.remove("active");
+      document.getElementById("cartDrawer").classList.remove("active");
+    }
+
+    /* Agregar un producto al carrito */
+    function addProductToCart(productId) {
+      const product = repuestosData.find(p => p.id === productId);
+      if (!product) return;
+
+      const cartItem = AppState.cart.find(item => item.id === productId);
+
+      if (cartItem) {
+        cartItem.qty++;
+      } else {
+        AppState.cart.push({
+          id: productId,
+          productRef: product,
+          qty: 1
+        });
+      }
+
+      // Animación de Badge de compra
+      const badge = document.getElementById("cartBadgeCount");
+      badge.classList.remove("shake-anim");
+      void badge.offsetWidth; // Disparador de reflow para reiniciar animación
+      badge.classList.add("shake-anim");
+
+      updateCartUI();
+
+      // Opcional: mostrar notificación flotante
+    }
+
+    /* Modificar cantidad de items */
+    function updateQty(productId, change) {
+      const cartItem = AppState.cart.find(item => item.id === productId);
+      if (!cartItem) return;
+
+      cartItem.qty += change;
+
+      if (cartItem.qty <= 0) {
+        removeProductFromCart(productId);
+      } else {
+        updateCartUI();
+      }
+    }
+
+    /* Eliminar producto del carrito */
+    function removeProductFromCart(productId) {
+      AppState.cart = AppState.cart.filter(item => item.id !== productId);
+      updateCartUI();
+    }
+
+    /* Actualizar contadores, totales y UI del carrito */
+    function updateCartUI() {
+      const drawerBody = document.getElementById("cartDrawerBody");
+      const badgeCount = document.getElementById("cartBadgeCount");
+      
+      const subtotalEl = document.getElementById("cartSubtotal");
+      const taxEl = document.getElementById("cartTax");
+      const totalEl = document.getElementById("cartTotal");
+
+      // Calcular cantidad de productos
+      const totalItems = AppState.cart.reduce((sum, item) => sum + item.qty, 0);
+      badgeCount.textContent = totalItems;
+
+      // Calcular Totales de dinero
+      const subtotal = AppState.cart.reduce((sum, item) => sum + (item.productRef.precio * item.qty), 0);
+      const tax = subtotal * 0.19; // IVA del 19%
+      const total = subtotal + tax;
+
+      subtotalEl.textContent = formatCurrency(subtotal);
+      taxEl.textContent = formatCurrency(tax);
+      totalEl.textContent = formatCurrency(total);
+
+      // Si el checkout está activo, no tocar el DOM de la lista de productos
+      if (AppState.isCheckoutFlow) {
+        return;
+      }
+
+      // Estado Vacío
+      if (AppState.cart.length === 0) {
+        drawerBody.innerHTML = `
+          <div class="cart-empty-state">
+            <i data-lucide="shopping-cart" style="width: 48px; height: 48px;"></i>
+            <p>Tu carrito está vacío.</p>
+            <p style="font-size: 0.8rem;">Busca repuestos compatibles con tu auto y agrégalos para simular tu pedido.</p>
+          </div>
+        `;
+        document.getElementById("checkoutFlowBtn").disabled = true;
+        lucide.createIcons();
+        return;
+      }
+
+      // Habilitar botón de pago si hay elementos
+      document.getElementById("checkoutFlowBtn").disabled = false;
+      document.getElementById("checkoutFlowBtn").innerHTML = "Proceder a Compra";
+
+      // Renderizar elementos del carrito
+      let itemsHTML = '<div class="cart-items-list">';
+      AppState.cart.forEach(item => {
+        itemsHTML += `
+          <div class="cart-item">
+            <div class="cart-item-img">
+              ${getProductSVG(item.productRef.categoria)}
+            </div>
+            <div class="cart-item-info">
+              <span class="cart-item-name">${item.productRef.nombre}</span>
+              <span class="cart-item-price">${formatCurrency(item.productRef.precio)} c/u</span>
+            </div>
+            <div class="cart-item-controls">
+              <div class="qty-counter">
+                <div class="qty-btn" onclick="updateQty(${item.id}, -1)">-</div>
+                <div class="qty-val">${item.qty}</div>
+                <div class="qty-btn" onclick="updateQty(${item.id}, 1)">+</div>
+              </div>
+              <div class="cart-item-remove-btn" onclick="removeProductFromCart(${item.id})">
+                <i data-lucide="trash-2" style="width: 12px; height: 12px;"></i>
+                Eliminar
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      itemsHTML += '</div>';
+
+      drawerBody.innerHTML = itemsHTML;
+      lucide.createIcons();
+    }
+
+    /* ==========================================
+       FLUJO DE FORMULARIO DE CHECKOUT Y ÉXITO
+       ========================================== */
+    function toggleCheckoutForm() {
+      const drawerBody = document.getElementById("cartDrawerBody");
+      const checkoutBtn = document.getElementById("checkoutFlowBtn");
+
+      if (AppState.cart.length === 0) return;
+
+      if (!AppState.isCheckoutFlow) {
+        // Activar Formulario de Checkout
+        AppState.isCheckoutFlow = true;
+        checkoutBtn.textContent = "Confirmar y Finalizar Pedido";
+
+        // Formulario
+        drawerBody.innerHTML = `
+          <div class="checkout-form-panel active">
+            <div style="margin-bottom: 1.25rem;">
+              <h4 style="color: #fff; margin-bottom: 0.25rem;">Formulario de Compra</h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">Completa tus datos para simular la facturación y el despacho de tus repuestos.</p>
+            </div>
+            
+            <form id="purchaseForm" class="checkout-form" onsubmit="processCheckout(event)">
+              <div class="checkout-input-group">
+                <label for="checkoutName">Nombre Completo *</label>
+                <input type="text" id="checkoutName" required placeholder="Ej. Juan Pérez">
+              </div>
+              
+              <div class="checkout-input-group">
+                <label for="checkoutEmail">Correo Electrónico *</label>
+                <input type="email" id="checkoutEmail" required placeholder="Ej. juan.perez@email.com">
+              </div>
+
+              <div class="checkout-input-group">
+                <label for="checkoutPhone">Teléfono / WhatsApp *</label>
+                <input type="tel" id="checkoutPhone" required placeholder="Ej. 3123456789">
+              </div>
+
+              <div class="checkout-input-group">
+                <label for="checkoutAddress">Dirección de Entrega *</label>
+                <input type="text" id="checkoutAddress" required placeholder="Ej. Calle 100 #15-30, Apto 302">
+              </div>
+
+              <div class="checkout-input-group">
+                <label for="checkoutPayment">Método de Pago (Simulado) *</label>
+                <select id="checkoutPayment" required>
+                  <option value="Contra Entrega">Pago Contra Entrega</option>
+                  <option value="Transferencia Bancaria Directa">Transferencia PSE / Bancolombia</option>
+                  <option value="Tarjeta de Crédito Simulada">Tarjeta de Crédito (Simulada)</option>
+                </select>
+              </div>
+              
+              <!-- Input submit invisible para activar validaciones nativas HTML -->
+              <input type="submit" id="hiddenSubmit" style="display: none;">
+            </form>
+          </div>
+        `;
+        lucide.createIcons();
+      } else {
+        // Presionar el botón realiza el submit del formulario real para validaciones HTML5
+        document.getElementById("hiddenSubmit").click();
+      }
+    }
+
+    /* Validar y procesar simulación de pedido */
+    function processCheckout(event) {
+      event.preventDefault(); // Detener envío real
+
+      const drawerBody = document.getElementById("cartDrawerBody");
+      const checkoutBtn = document.getElementById("checkoutFlowBtn");
+      const footer = document.getElementById("cartDrawerFooter");
+
+      // Datos del Formulario
+      const name = document.getElementById("checkoutName").value;
+      const email = document.getElementById("checkoutEmail").value;
+      const phone = document.getElementById("checkoutPhone").value;
+      const address = document.getElementById("checkoutAddress").value;
+      const payment = document.getElementById("checkoutPayment").value;
+
+      // Estado cargando (simulación mecánica)
+      drawerBody.innerHTML = `
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:1rem; padding: 4rem 1rem;">
+          <div style="border: 4px solid var(--border); border-top: 4px solid var(--primary); border-radius:50%; width:48px; height:48px; animation: rotate-slow 1s linear infinite;"></div>
+          <h4 style="color:#fff;">Validando Compatibilidad...</h4>
+          <p style="font-size: 0.8rem; color:var(--text-secondary); text-align:center;">Nuestros servidores están realizando una doble comprobación de ajuste físico de las piezas.</p>
+        </div>
+      `;
+      checkoutBtn.style.display = "none";
+      footer.style.display = "none";
+
+      // 1.5 Segundos de espera técnica para simulación
+      setTimeout(() => {
+        const orderNumber = "RMX-" + Math.floor(100000 + Math.random() * 900000);
+        const subtotal = AppState.cart.reduce((sum, item) => sum + (item.productRef.precio * item.qty), 0);
+        const tax = subtotal * 0.19;
+        const total = subtotal + tax;
+
+        // Renderizado del éxito
+        drawerBody.innerHTML = `
+          <div class="success-panel">
+            <div class="success-ring">
+              <i data-lucide="check" style="width: 38px; height: 38px;"></i>
+            </div>
+            <h3 class="success-title">¡Pedido Confirmado!</h3>
+            <p class="success-desc">Tu pedido ha sido procesado de forma exitosa y está listo para empaque en nuestro taller.</p>
+            
+            <div class="order-receipt">
+              <div style="font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; margin-bottom: 0.5rem; color:#fff;">
+                Recibo de Pedido #${orderNumber}
+              </div>
+              <div class="receipt-row">
+                <span>Cliente:</span>
+                <span>${name}</span>
+              </div>
+              <div class="receipt-row">
+                <span>Teléfono:</span>
+                <span>${phone}</span>
+              </div>
+              <div class="receipt-row">
+                <span>Dirección:</span>
+                <span>${address}</span>
+              </div>
+              <div class="receipt-row">
+                <span>Método de Pago:</span>
+                <span>${payment}</span>
+              </div>
+              <div class="receipt-row">
+                <span>Piezas Solicitadas:</span>
+                <span>${AppState.cart.reduce((s,i) => s + i.qty, 0)} unidades</span>
+              </div>
+              <div class="receipt-row">
+                <span>Total Facturado:</span>
+                <span>${formatCurrency(total)}</span>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="generateWhatsAppRedirect('${orderNumber}', '${name}', '${total}')">
+              <i data-lucide="message-square" style="width: 18px; height: 18px;"></i>
+              Enviar a un Asesor WhatsApp
+            </button>
+            <button class="btn btn-outline" style="width: 100%;" onclick="clearCartAndClose()">
+              Terminar Simulación
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+      }, 1500);
+    }
+
+    /* Redirección simulada a WhatsApp */
+    function generateWhatsAppRedirect(orderNum, name, totalVal) {
+      const message = encodeURIComponent(`Hola RepuMax, acabo de simular mi pedido #${orderNum}. Cliente: ${name}, Total: ${formatCurrency(totalVal)}. ¡Excelente aplicación!`);
+      const url = `https://wa.me/573219876543?text=${message}`;
+      window.open(url, '_blank');
+    }
+
+    /* Limpiar carrito y cerrar drawer */
+    function clearCartAndClose() {
+      AppState.cart = [];
+      AppState.isCheckoutFlow = false;
+      
+      const checkoutBtn = document.getElementById("checkoutFlowBtn");
+      const footer = document.getElementById("cartDrawerFooter");
+      checkoutBtn.style.display = "flex";
+      footer.style.display = "block";
+
+      closeCartDrawer();
+      updateCartUI();
+    }
+  </script>
+</body>
+</html>
